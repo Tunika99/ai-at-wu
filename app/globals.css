@@ -1,0 +1,330 @@
+@import "tailwindcss";
+
+@theme {
+  /* ---- AI @ WU design tokens - dark purple scheme ---- */
+  --color-void: #08060f;
+  --color-abyss: #0d0a19;
+  --color-panel: #131022;
+  --color-line: rgba(167, 139, 250, 0.14);
+
+  --color-neon: #a78bfa;
+  --color-pulse: #e879f9;
+  --color-signal: #22d3ee;
+
+  --color-ink: #eae7f4;
+  --color-mist: #a09aba;
+
+  --font-display: var(--font-space-grotesk), "Space Grotesk", sans-serif;
+  --font-sans: var(--font-inter), "Inter", system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), "JetBrains Mono", monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-void);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(167, 139, 250, 0.35);
+}
+
+/* Subtle blueprint grid, Oryzo-style engineering backdrop */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(167, 139, 250, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(167, 139, 250, 0.05) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 30%, black 40%, transparent 100%);
+}
+
+/* Slow-drifting purple nebula behind the whole site */
+@keyframes aurora-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(3%, -2%) scale(1.06);
+  }
+  66% {
+    transform: translate(-2%, 2%) scale(0.96);
+  }
+}
+
+.bg-aurora {
+  background:
+    radial-gradient(38% 30% at 20% 25%, rgba(139, 92, 246, 0.17), transparent 70%),
+    radial-gradient(30% 26% at 80% 18%, rgba(217, 70, 239, 0.1), transparent 70%),
+    radial-gradient(36% 30% at 62% 80%, rgba(109, 40, 217, 0.16), transparent 70%);
+  animation: aurora-drift 26s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-aurora {
+    animation: none;
+  }
+}
+
+/* Glassmorphism surface */
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Neon glow helpers */
+.glow-neon {
+  box-shadow:
+    0 0 24px rgba(167, 139, 250, 0.38),
+    0 0 80px rgba(139, 92, 246, 0.14);
+}
+
+.text-gradient {
+  background: linear-gradient(100deg, #eae7f4 10%, #a78bfa 55%, #e879f9 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Gradient hairline border for bento tiles (1px padding trick) */
+.border-gradient {
+  border-radius: 1rem;
+  padding: 1px;
+  background: linear-gradient(
+    140deg,
+    rgba(167, 139, 250, 0.4),
+    rgba(232, 121, 249, 0.14) 45%,
+    rgba(167, 139, 250, 0.06)
+  );
+}
+
+/* Cursor-tracking glow inside bento tiles (--mx/--my set by GlowCard) */
+.glow-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.glow-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    340px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(167, 139, 250, 0.13),
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.glow-card:hover::before {
+  opacity: 1;
+}
+
+/* ---- Hero intro choreography (pure CSS: runs even if JS stalls) ---- */
+
+/* The @ opens huge, holds a beat, then spins while shrinking into place */
+@keyframes at-intro {
+  0% {
+    opacity: 0;
+    transform: scale(9) rotate(-540deg);
+  }
+  18% {
+    opacity: 1;
+    transform: scale(9) rotate(-540deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.at-intro {
+  animation: at-intro 2s cubic-bezier(0.7, 0, 0.3, 1) both;
+}
+
+/* AI and WU get released outward from behind the @ with a slight overshoot */
+@keyframes word-release-left {
+  0% {
+    opacity: 0;
+    transform: translateX(85%) scale(0.6);
+  }
+  55% {
+    opacity: 1;
+  }
+  80% {
+    transform: translateX(-3%) scale(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes word-release-right {
+  0% {
+    opacity: 0;
+    transform: translateX(-85%) scale(0.6);
+  }
+  55% {
+    opacity: 1;
+  }
+  80% {
+    transform: translateX(3%) scale(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+.word-release-left {
+  animation: word-release-left 1s cubic-bezier(0.22, 1, 0.36, 1) 1.35s both;
+}
+
+.word-release-right {
+  animation: word-release-right 1s cubic-bezier(0.22, 1, 0.36, 1) 1.35s both;
+}
+
+/* Content reveals after the @ lands (delay set inline per element) */
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero-reveal {
+  animation: hero-fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Continuous rotations for the @ and its construction circles */
+@keyframes spin-cw {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-ccw {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.spin-30 {
+  animation: spin-cw 30s linear infinite;
+}
+
+.spin-48-rev {
+  animation: spin-ccw 48s linear infinite;
+}
+
+.spin-18 {
+  animation: spin-cw 18s linear infinite;
+}
+
+@keyframes cue-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+.cue-bob {
+  animation: cue-bob 2s ease-in-out infinite;
+}
+
+/* Route transition: each navigation settles in rather than snapping.
+   Opacity only - deliberately no transform: `animation-fill-mode: both`
+   leaves an identity matrix behind, which still creates a containing
+   block and would break `position: fixed` on the site backdrop. */
+@keyframes page-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.page-enter {
+  animation: page-enter 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-enter {
+    animation: none;
+  }
+}
+
+/* Nav links: hairline underline wipes in from the left on hover */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--color-neon),
+    rgba(232, 121, 249, 0.7)
+  );
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* Infinite marquee strip (track holds two copies of its content) */
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 36s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .at-intro,
+  .word-release-left,
+  .word-release-right,
+  .hero-reveal,
+  .spin-30,
+  .spin-48-rev,
+  .spin-18,
+  .cue-bob,
+  .marquee-track {
+    animation: none;
+  }
+}
