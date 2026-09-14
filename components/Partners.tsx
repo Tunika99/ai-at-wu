@@ -73,10 +73,10 @@ export function Partners() {
                 through workshops, recruiting formats or event sponsoring.
               </p>
               <a
-                href="mailto:partners@aiatwu.at"
+                href="mailto:partners@aisocietyvienna.tech"
                 className="group mt-auto inline-flex items-center gap-2 text-sm font-semibold text-neon"
               >
-                partners@aiatwu.at
+                partners@aisocietyvienna.tech
                 <ArrowUpRightIcon className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
             </article>

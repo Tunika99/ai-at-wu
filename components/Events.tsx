@@ -22,31 +22,24 @@ export function Events({ events = defaultEvents }: { events?: EventItem[] }) {
       <div className="mx-auto max-w-6xl">
         <SectionHeading
           index="04"
-          label="PROGRAM & EVENTS"
-          title="Upcoming this semester."
-          intro="Workshops, speaker nights and meetups - updated by the events team in the CMS, always current here."
+          label="EVENTS"
+          title="Past events."
+          intro="A look back at the workshops, speaker nights and meetups we have hosted."
         />
 
         <div className="mt-14 flex flex-col divide-y divide-line border-y border-line">
           {events.map((event, i) => (
-            <Reveal key={`${event.day}-${event.title}`} delay={0.07 * i}>
+            <Reveal key={event.title} delay={0.07 * i}>
               <article className="group flex items-center gap-6 px-2 py-6 transition-colors duration-300 hover:bg-white/[0.03] md:gap-10 md:px-6">
-                <div className="flex w-14 shrink-0 flex-col items-center">
-                  <span className="font-display text-3xl font-semibold text-ink">
-                    {event.day}
-                  </span>
-                  <span className="font-mono text-[10px] tracking-[0.25em] text-neon">
-                    {event.month}
-                  </span>
-                </div>
-
                 <div className="min-w-0 flex-1">
                   <h3 className="font-display truncate font-semibold text-ink md:text-lg">
                     {event.title}
                   </h3>
-                  <p className="mt-1.5 font-mono text-[10px] tracking-[0.18em] text-mist">
-                    {event.time} · {event.location.toUpperCase()}
-                  </p>
+                  {event.location && (
+                    <p className="mt-1.5 font-mono text-[10px] tracking-[0.18em] text-mist">
+                      {event.location.toUpperCase()}
+                    </p>
+                  )}
                 </div>
 
                 <span
@@ -65,7 +58,7 @@ export function Events({ events = defaultEvents }: { events?: EventItem[] }) {
 
         <Reveal delay={0.2} className="mt-10 text-center">
           <p className="font-mono text-[10px] tracking-[0.25em] text-mist/60">
-            [ FULL CALENDAR AVAILABLE IN THE MEMBER PORTAL ]
+            [ UPCOMING EVENTS ARE ANNOUNCED IN THE MEMBER PORTAL ]
           </p>
         </Reveal>
       </div>

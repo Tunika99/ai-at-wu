@@ -6,12 +6,14 @@ import {
   motion,
   useInView,
   useMotionValue,
+  useReducedMotion,
   useSpring,
   useTransform,
 } from "framer-motion";
 import { site } from "@/lib/site";
 import type { SiteSettings } from "@/lib/data";
 import { ScrambleText } from "@/components/ScrambleText";
+import { AtOrbit } from "@/components/Wordmark";
 import { CtaButton } from "@/components/CtaButton";
 import { Marquee } from "@/components/Marquee";
 
@@ -21,7 +23,7 @@ const ease = [0.22, 1, 0.36, 1] as const;
  * Entrance choreography timing (seconds). The @ intro and all reveals
  * run as pure CSS animations so the landing sequence works even if the
  * JS animation loop stalls; framer-motion only adds progressive extras
- * (cursor parallax, count-up).
+ * (cursor parallax, hover tilt, count-up).
  */
 const CONTENT_DELAY = 2.1;
 
@@ -57,26 +59,6 @@ function CountUp({
   return <span ref={ref}>{`${to}${suffix}`}</span>;
 }
 
-/**
- * The rotating "@" - the brand mark. A spinning glyph inside
- * counter-rotating blueprint construction circles with handle dots,
- * borrowed from the Oryzo intro aesthetic. All rotation is CSS.
- */
-function AtOrbit() {
-  return (
-    <span className="relative inline-flex h-[1.05em] w-[1.1em] items-center justify-center">
-      <span className="spin-30 pointer-events-none absolute inset-[-12%] rounded-full border border-dashed border-neon/35">
-        <span className="absolute top-0 left-1/2 h-[0.055em] w-[0.055em] -translate-x-1/2 -translate-y-1/2 bg-neon" />
-        <span className="absolute bottom-0 left-1/2 h-[0.055em] w-[0.055em] -translate-x-1/2 translate-y-1/2 bg-neon" />
-        <span className="absolute top-1/2 left-0 h-[0.055em] w-[0.055em] -translate-x-1/2 -translate-y-1/2 bg-neon" />
-        <span className="absolute top-1/2 right-0 h-[0.055em] w-[0.055em] translate-x-1/2 -translate-y-1/2 bg-neon" />
-      </span>
-      <span className="spin-48-rev pointer-events-none absolute inset-[-28%] rounded-full border border-dotted border-pulse/25" />
-      <span className="spin-18 text-gradient inline-block leading-none">@</span>
-    </span>
-  );
-}
-
 export function Hero({
   settings = {
     mission: site.mission,
@@ -101,8 +83,22 @@ export function Hero({
   const auraY = useTransform(sy, [-1, 1], [-25, 25]);
   const auraX2 = useTransform(sx, [-1, 1], [30, -30]);
   const auraY2 = useTransform(sy, [-1, 1], [20, -20]);
-  const headX = useTransform(sx, [-1, 1], [-10, 10]);
-  const headY = useTransform(sy, [-1, 1], [-6, 6]);
+
+  // Logo hover: while the pointer is over the mark it tilts toward it in
+  // 3D, is pulled a little further (magnetic) and grows slightly. The
+  // lockup's parts sit on separate depth planes, so the tilt parallaxes.
+  const reduced = useReducedMotion();
+  const lx = useMotionValue(0);
+  const ly = useMotionValue(0);
+  const hover = useMotionValue(0);
+  const slx = useSpring(lx, { stiffness: 120, damping: 13, mass: 0.6 });
+  const sly = useSpring(ly, { stiffness: 120, damping: 13, mass: 0.6 });
+  const shover = useSpring(hover, { stiffness: 160, damping: 18 });
+  const logoX = useTransform([sx, slx], ([a, b]: number[]) => a * 10 + b * 18);
+  const logoY = useTransform([sy, sly], ([a, b]: number[]) => a * 6 + b * 12);
+  const logoRotY = useTransform(slx, [-1, 1], [-15, 15]);
+  const logoRotX = useTransform(sly, [-1, 1], [12, -12]);
+  const logoScale = useTransform(shover, [0, 1], [1, 1.05]);
 
   return (
     <section
@@ -126,12 +122,14 @@ export function Hero({
       {/* HUD corner annotations */}
       <span
         style={{ animationDelay: "2.8s" }}
+        data-neural-avoid=""
         className="hero-reveal absolute top-24 left-6 hidden font-mono text-[10px] tracking-[0.2em] text-mist/50 md:block"
       >
         [ 48.2131° N - 16.4085° E ]
       </span>
       <span
         style={{ animationDelay: "2.8s" }}
+        data-neural-avoid=""
         className="hero-reveal absolute top-24 right-6 hidden items-center gap-2 font-mono text-[10px] tracking-[0.2em] text-mist/50 md:flex"
       >
         <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-neon" />
@@ -139,33 +137,68 @@ export function Hero({
       </span>
       <span
         style={{ animationDelay: "3s" }}
+        data-neural-avoid=""
         className="hero-reveal absolute bottom-16 left-6 hidden font-mono text-[10px] tracking-[0.2em] text-mist/50 md:block"
       >
         [ WELTHANDELSPLATZ 1 - 1020 WIEN ]
       </span>
       <span
         style={{ animationDelay: "3s" }}
+        data-neural-avoid=""
         className="hero-reveal absolute right-6 bottom-16 hidden font-mono text-[10px] tracking-[0.2em] text-mist/50 md:block"
       >
         [ V1.0 // OPEN BETA ]
       </span>
 
-      {/* Headline: the @ lands from its giant intro spin and releases AI / WU */}
+      {/* Headline: the @ lands from its giant intro spin and releases AI and
+          VIENNA. SOCIETY rides directly above VIENNA, so the name reads
+          "AI @ Society Vienna". The parts sit on separate depth planes, so
+          the hover tilt parallaxes - the @ floats in front. */}
       <motion.h1
-        style={{ x: headX, y: headY }}
-        className="font-display flex items-center gap-[0.18em] text-6xl font-bold tracking-tight sm:text-7xl md:text-8xl lg:text-9xl"
+        aria-label="AI Society Vienna"
+        onPointerMove={(e) => {
+          if (reduced) return;
+          const r = e.currentTarget.getBoundingClientRect();
+          lx.set(Math.max(-1, Math.min(1, ((e.clientX - r.left) / r.width - 0.5) * 2)));
+          ly.set(Math.max(-1, Math.min(1, ((e.clientY - r.top) / r.height - 0.5) * 2)));
+          hover.set(1);
+        }}
+        onPointerLeave={() => {
+          lx.set(0);
+          ly.set(0);
+          hover.set(0);
+        }}
+        style={{
+          x: logoX,
+          y: logoY,
+          rotateX: logoRotX,
+          rotateY: logoRotY,
+          scale: logoScale,
+          transformPerspective: 900,
+          transformStyle: "preserve-3d",
+        }}
+        className="font-display -m-8 flex items-center gap-[0.18em] p-8 text-[2.6rem] leading-none font-bold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl"
       >
-        <span className="word-release-left relative z-0 inline-block">
-          <ScrambleText
-            words={["AI", "ML", "NN", "AI", "DL", "RL", "AI", "CV"]}
-            className="inline-block w-[1.42em] text-center"
-          />
+        <span className="inline-block" style={{ transform: "translateZ(0.12em)" }}>
+          <span data-neural-avoid="" className="word-release-left relative z-0 inline-block">
+            <ScrambleText
+              words={["AI", "ML", "NN", "AI", "DL", "RL", "AI", "CV"]}
+              className="inline-block w-[1.42em] text-center"
+            />
+          </span>
         </span>
-        <span className="at-intro relative z-10 inline-block">
-          <AtOrbit />
+        <span className="inline-block" style={{ transform: "translateZ(0.45em)" }}>
+          <span className="at-intro relative z-10 inline-block">
+            <AtOrbit neural />
+          </span>
         </span>
-        <span className="word-release-right relative z-0 inline-block">
-          WU
+        <span className="inline-block" style={{ transform: "translateZ(0.12em)" }}>
+          <span data-neural-avoid="" className="word-release-right relative z-0 inline-block">
+            <span data-neural-avoid="" className="absolute bottom-full left-[0.06em] mb-[0.02em] text-[0.26em] font-medium tracking-[0.42em] whitespace-nowrap text-mist">
+              SOCIETY
+            </span>
+            VIENNA
+          </span>
         </span>
       </motion.h1>
 
@@ -223,6 +256,7 @@ export function Hero({
       {/* Scroll cue */}
       <div
         style={{ animationDelay: "3s" }}
+        data-neural-avoid=""
         className="hero-reveal absolute bottom-16 flex flex-col items-center gap-2"
       >
         <span className="cue-bob h-8 w-px bg-gradient-to-b from-neon/80 to-transparent" />

@@ -3,7 +3,7 @@ import { Studio } from "@/components/Studio";
 import { sanityConfigured } from "@/sanity/env";
 
 export const metadata: Metadata = {
-  title: "Studio - AI @ WU",
+  title: "Studio - AI Society Vienna",
   robots: { index: false },
 };
 

@@ -1,5 +1,5 @@
 const items = [
-  "WU VIENNA · EST. 2024",
+  "WU VIENNA · EST. 2026",
   "WORKSHOPS",
   "SPEAKER NIGHTS",
   "HACKATHONS",

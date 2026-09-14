@@ -7,13 +7,15 @@
  * real figures.
  */
 export const site = {
-  name: "AI @ WU",
+  name: "AI Society Vienna",
   mission:
     "We make artificial intelligence tangible for every student at WU - through hands-on workshops, world-class speakers and a community that builds.",
-  foundedYear: 2024,
-  memberCount: "250+",
+  foundedYear: 2026,
+  memberCount: "50+",
   eventsPerYear: "30+",
   partner: "AI @ Penn",
+  /** Board group photo in /public, e.g. "/team.jpg". Empty shows a placeholder frame. */
+  teamPhoto: "",
   cta: {
     joinLabel: "Become a Member",
     joinHref: "/join",
@@ -26,11 +28,11 @@ export const site = {
    */
   memberPortal: {
     label: "Member Portal",
-    url: "https://www.notion.so/ai-at-wu/member-portal",
+    url: "https://www.notion.so/ai-society-vienna/member-portal",
   },
   socials: {
-    instagram: "https://www.instagram.com/ai.at.wu",
-    linkedin: "https://www.linkedin.com/company/ai-at-wu",
+    instagram: "https://www.instagram.com/aisocietyvienna",
+    linkedin: "https://www.linkedin.com/company/ai-society-vienna",
   },
   /**
    * Root-relative hashes, not bare "#about": the navbar also renders on

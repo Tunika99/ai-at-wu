@@ -18,9 +18,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AI @ WU - The AI Society at WU Vienna",
+  title: "AI Society Vienna - The AI Student Society at WU",
   description:
-    "AI @ WU is the student society for artificial intelligence at WU Vienna. Workshops, speaker events, and a community that builds - in partnership with AI @ Penn.",
+    "AI Society Vienna is the student society for artificial intelligence at WU Vienna. Workshops, speaker events, and a community that builds - in partnership with AI @ Penn.",
 };
 
 export default function RootLayout({

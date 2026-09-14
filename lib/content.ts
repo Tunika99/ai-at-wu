@@ -78,7 +78,7 @@ export const events: EventItem[] = [
   {
     day: "30",
     month: "SEP",
-    title: "Semester Kickoff - Welcome to AI @ WU",
+    title: "Semester Kickoff - Welcome to AI Society Vienna",
     type: "Meetup",
     time: "18:30",
     location: "LC Forum, WU Campus",
@@ -102,7 +102,7 @@ export const events: EventItem[] = [
   {
     day: "11",
     month: "NOV",
-    title: "AI @ WU × AI @ Penn - Global Exchange Session",
+    title: "AI Society Vienna × AI @ Penn - Global Exchange Session",
     type: "Meetup",
     time: "16:00",
     location: "Online",

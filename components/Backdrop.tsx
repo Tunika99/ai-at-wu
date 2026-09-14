@@ -13,7 +13,7 @@ export function Backdrop() {
     >
       <div className="bg-aurora absolute -inset-[15%]" />
       <div className="bg-grid absolute inset-0" />
-      <NeuralField className="absolute inset-0 h-full w-full opacity-60" />
+      <NeuralField className="absolute inset-0 h-full w-full" />
     </div>
   );
 }

@@ -79,7 +79,7 @@ export async function getEvents(): Promise<EventItem[]> {
   if (!client) return fallbackEvents;
   try {
     const docs = await client.fetch<EventDoc[] | null>(
-      groq`*[_type == "event" && dateTime(date) >= dateTime(now())] | order(date asc)[0...6]{title, type, date, location}`,
+      groq`*[_type == "event" && dateTime(date) < dateTime(now())] | order(date desc)[0...6]{title, type, date, location}`,
       {},
       FETCH_OPTIONS,
     );

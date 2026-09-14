@@ -7,6 +7,7 @@ import {
 } from "@/components/icons";
 import { site } from "@/lib/site";
 import { CtaButton } from "@/components/CtaButton";
+import { Wordmark } from "@/components/Wordmark";
 
 export function Footer() {
   return (
@@ -37,8 +38,8 @@ export function Footer() {
       <div className="mx-auto mt-24 max-w-6xl border-t border-line pt-10">
         <div className="flex flex-col gap-10 md:flex-row md:justify-between">
           <div className="max-w-xs">
-            <p className="font-display text-lg font-semibold tracking-tight">
-              AI&nbsp;<span className="text-neon">@</span>&nbsp;WU
+            <p className="text-[22px] text-ink">
+              <Wordmark />
             </p>
             <p className="mt-3 text-sm leading-relaxed text-mist">
               The student society for artificial intelligence at WU Vienna.
@@ -85,10 +86,10 @@ export function Footer() {
               [ CONTACT ]
             </p>
             <a
-              href="mailto:hello@aiatwu.at"
+              href="mailto:hello@aisocietyvienna.tech"
               className="text-sm text-mist transition-colors duration-200 hover:text-ink"
             >
-              hello@aiatwu.at
+              hello@aisocietyvienna.tech
             </a>
             <a
               href={site.memberPortal.url}
@@ -103,7 +104,7 @@ export function Footer() {
         </div>
 
         <p className="mt-12 text-center font-mono text-[10px] tracking-[0.2em] text-mist/40">
-          © 2026 AI @ WU - STUDENT SOCIETY AT WU VIENNA · MADE IN VIENNA
+          © 2026 AI SOCIETY VIENNA - STUDENT SOCIETY AT WU VIENNA · MADE IN VIENNA
         </p>
       </div>
     </footer>

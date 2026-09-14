@@ -3,11 +3,12 @@ import Link from "next/link";
 import { Backdrop } from "@/components/Backdrop";
 import { Navbar } from "@/components/Navbar";
 import { JoinForm } from "@/components/JoinForm";
+import { Wordmark } from "@/components/Wordmark";
 
 export const metadata: Metadata = {
-  title: "Become a Member - AI @ WU",
+  title: "Become a Member - AI Society Vienna",
   description:
-    "Join AI @ WU, the student society for artificial intelligence at WU Vienna. Free for WU students.",
+    "Join AI Society Vienna, the student society for artificial intelligence at WU Vienna. Free for WU students.",
 };
 
 export default function JoinPage() {
@@ -23,8 +24,8 @@ export default function JoinPage() {
           <p className="font-mono text-[11px] tracking-[0.25em] text-neon">
             [ MEMBERSHIP APPLICATION ]
           </p>
-          <h1 className="font-display mt-4 text-4xl font-bold tracking-tight md:text-5xl">
-            Join AI <span className="text-gradient">@</span> WU
+          <h1 className="font-display mt-5 flex items-end justify-center gap-[0.3em] text-4xl leading-none font-bold tracking-tight md:text-5xl">
+            Join <Wordmark />
           </h1>
           <p className="mx-auto mt-5 max-w-md leading-relaxed text-mist">
             Free for WU students. Fill in the form and we&apos;ll onboard you

@@ -10,6 +10,7 @@ import {
   LockIcon,
 } from "@/components/icons";
 import { CtaButton } from "@/components/CtaButton";
+import { Wordmark } from "@/components/Wordmark";
 
 export function Navbar() {
   const pathname = usePathname();
@@ -59,11 +60,8 @@ export function Navbar() {
       >
         {/* Wordmark + inline nav */}
         <div className="flex min-w-0 flex-wrap items-center gap-x-6 gap-y-1">
-          <Link
-            href="/"
-            className="font-display text-lg font-semibold tracking-tight"
-          >
-            AI&nbsp;<span className="text-neon">@</span>&nbsp;WU
+          <Link href="/" className="text-[19px] text-ink">
+            <Wordmark />
           </Link>
 
           <nav className="flex flex-wrap items-center gap-x-4 gap-y-1 sm:gap-x-5">

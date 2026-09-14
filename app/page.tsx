@@ -7,14 +7,13 @@ import { Benefits } from "@/components/Benefits";
 import { Events } from "@/components/Events";
 import { Partners } from "@/components/Partners";
 import { Footer } from "@/components/Footer";
-import { getEvents, getSiteSettings, getTeam } from "@/lib/data";
+import { getEvents, getSiteSettings } from "@/lib/data";
 
 export const revalidate = 60;
 
 export default async function Home() {
-  const [settings, team, events] = await Promise.all([
+  const [settings, events] = await Promise.all([
     getSiteSettings(),
-    getTeam(),
     getEvents(),
   ]);
 
@@ -24,7 +23,7 @@ export default async function Home() {
       <Navbar />
       <Hero settings={settings} />
       <About />
-      <Team members={team} />
+      <Team />
       <Benefits />
       <Events events={events} />
       <Partners />

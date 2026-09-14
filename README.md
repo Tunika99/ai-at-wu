@@ -1,6 +1,6 @@
-# AI @ WU — Website
+# AI Society Vienna - Website
 
-Next.js 15 site for the AI @ WU student society. Dark/neon design, CSS-driven hero choreography, Sanity CMS for content editing.
+Next.js 15 site for the AI Society Vienna student society. Dark/neon design, CSS-driven hero choreography, Sanity CMS for content editing.
 
 ## Development
 

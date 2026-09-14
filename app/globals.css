@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  /* ---- AI @ WU design tokens - dark purple scheme ---- */
+  /* ---- AI Society Vienna design tokens - dark purple scheme ---- */
   --color-void: #08060f;
   --color-abyss: #0d0a19;
   --color-panel: #131022;
@@ -129,7 +129,72 @@ body {
   opacity: 1;
 }
 
-/* ---- Hero intro choreography (pure CSS: runs even if JS stalls) ---- */
+/* ---- Logo assembly intro (pure CSS: runs even if JS stalls) ---- */
+
+/* Nodes pop in at the vertices */
+@keyframes logo-node-in {
+  from {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Edges draw themselves between the nodes (paths carry pathLength="1") */
+@keyframes logo-edge-in {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes logo-rule-in {
+  from {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+@keyframes logo-word-in {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.logo-anim .logo-node {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: logo-node-in 0.55s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+}
+
+.logo-anim .logo-edge {
+  stroke-dasharray: 1;
+  animation: logo-edge-in 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.logo-rule {
+  animation: logo-rule-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.logo-word {
+  animation: logo-word-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ---- @ intro choreography (pure CSS: runs even if JS stalls) ---- */
 
 /* The @ opens huge, holds a beat, then spins while shrinking into place */
 @keyframes at-intro {
@@ -151,7 +216,7 @@ body {
   animation: at-intro 2s cubic-bezier(0.7, 0, 0.3, 1) both;
 }
 
-/* AI and WU get released outward from behind the @ with a slight overshoot */
+/* AI and VIENNA get released outward from behind the @ with a slight overshoot */
 @keyframes word-release-left {
   0% {
     opacity: 0;
@@ -194,22 +259,6 @@ body {
   animation: word-release-right 1s cubic-bezier(0.22, 1, 0.36, 1) 1.35s both;
 }
 
-/* Content reveals after the @ lands (delay set inline per element) */
-@keyframes hero-fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(28px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-.hero-reveal {
-  animation: hero-fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
 /* Continuous rotations for the @ and its construction circles */
 @keyframes spin-cw {
   to {
@@ -233,6 +282,22 @@ body {
 
 .spin-18 {
   animation: spin-cw 18s linear infinite;
+}
+
+/* Content reveals after the @ lands (delay set inline per element) */
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero-reveal {
+  animation: hero-fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 @keyframes cue-bob {
@@ -319,10 +384,14 @@ body {
   .at-intro,
   .word-release-left,
   .word-release-right,
-  .hero-reveal,
   .spin-30,
   .spin-48-rev,
   .spin-18,
+  .logo-anim .logo-node,
+  .logo-anim .logo-edge,
+  .logo-rule,
+  .logo-word,
+  .hero-reveal,
   .cue-bob,
   .marquee-track {
     animation: none;

@@ -32,7 +32,7 @@ export function About() {
           index="01"
           label="ABOUT US"
           title="AI should be something you can do - not just talk about."
-          intro="AI @ WU is the student society for artificial intelligence at WU Vienna. We turn curiosity into capability, one workshop, speaker night and project at a time."
+          intro="AI Society Vienna is the student society for artificial intelligence at WU Vienna. We turn curiosity into capability, one workshop, speaker night and project at a time."
         />
 
         <div className="mt-14 grid gap-5 md:grid-cols-3">
