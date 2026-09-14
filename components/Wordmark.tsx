@@ -37,9 +37,12 @@ export function AtOrbit({ neural = false }: { neural?: boolean }) {
         <span {...handle} className="absolute top-1/2 right-0 h-[0.055em] w-[0.055em] translate-x-1/2 -translate-y-1/2 bg-neon" />
       </span>
       <span className="spin-48-rev pointer-events-none absolute inset-[-28%] rounded-full border border-dotted border-pulse/25" />
+      {/* Padding + equal negative margin: Safari paints gradient text only
+          inside the element box, and the @ ink sits flush with its 1em box -
+          without the extra room its lower edge gets shaved off while it spins. */}
       <span
         {...anchor(neural, "#e879f9", 280, 2000)}
-        className="spin-18 text-gradient inline-block leading-none"
+        className="spin-18 text-gradient -mx-[0.1em] -my-[0.22em] inline-block px-[0.1em] py-[0.22em] leading-none"
       >
         @
       </span>

@@ -214,6 +214,7 @@ body {
 
 .at-intro {
   animation: at-intro 2s cubic-bezier(0.7, 0, 0.3, 1) both;
+  will-change: transform, opacity;
 }
 
 /* AI and VIENNA get released outward from behind the @ with a slight overshoot */
@@ -253,10 +254,12 @@ body {
 
 .word-release-left {
   animation: word-release-left 1s cubic-bezier(0.22, 1, 0.36, 1) 1.35s both;
+  will-change: transform, opacity;
 }
 
 .word-release-right {
   animation: word-release-right 1s cubic-bezier(0.22, 1, 0.36, 1) 1.35s both;
+  will-change: transform, opacity;
 }
 
 /* Continuous rotations for the @ and its construction circles */

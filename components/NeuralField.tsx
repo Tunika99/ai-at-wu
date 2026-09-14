@@ -147,7 +147,12 @@ export function NeuralField({ className }: { className?: string }) {
     const reduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    // Phones get a lighter canvas (lower resolution, fewer particles), and the
+    // network only starts once the @ intro has landed, so the showpiece
+    // animation has the device to itself.
+    const lite = window.matchMedia("(max-width: 767px), (pointer: coarse)").matches;
+    const dpr = Math.min(window.devicePixelRatio || 1, lite ? 1.5 : 2);
+    const START_MS = lite && !reduced ? 2100 : 0;
     let raf = 0;
     let w = 0;
     let h = 0;
@@ -298,7 +303,10 @@ export function NeuralField({ className }: { className?: string }) {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       // Jittered grid instead of pure random: random placement clumps,
       // this spreads the network evenly across the screen.
-      const count = Math.min(90, Math.max(30, Math.floor((w * h) / 18000)));
+      const count = Math.min(
+        90,
+        Math.max(lite ? 22 : 30, Math.floor((w * h) / (lite ? 20000 : 18000))),
+      );
       const cols = Math.max(1, Math.round(Math.sqrt((count * w) / h)));
       const rows = Math.ceil(count / cols);
       const cw = w / cols;
@@ -470,9 +478,14 @@ export function NeuralField({ className }: { className?: string }) {
       }
 
       // The network is dim until the logo has assembled, then wakes up.
-      const wake = reduced
-        ? 1
-        : Math.min(1, 0.35 + (Math.max(0, now - born - 1400) / 1600) * 0.65);
+      const appear = START_MS
+        ? Math.min(1, Math.max(0, now - born - START_MS) / 900)
+        : 1;
+      const wake =
+        (reduced
+          ? 1
+          : Math.min(1, 0.35 + (Math.max(0, now - born - 1400) / 1600) * 0.65)) *
+        appear;
 
       ctx.clearRect(0, 0, w, h);
 
@@ -675,7 +688,10 @@ export function NeuralField({ className }: { className?: string }) {
     resize();
     // Also under reduced motion: particles stay frozen (step 0), but the
     // keep-out zones must follow the text while the page scrolls.
-    raf = requestAnimationFrame(loop);
+    const startTimer = window.setTimeout(
+      () => (raf = requestAnimationFrame(loop)),
+      START_MS,
+    );
 
     const onMove = (e: PointerEvent) => {
       const rect = canvas.getBoundingClientRect();
@@ -691,6 +707,7 @@ export function NeuralField({ className }: { className?: string }) {
     window.addEventListener("pointermove", onMove);
     document.addEventListener("pointerleave", onLeave);
     return () => {
+      window.clearTimeout(startTimer);
       cancelAnimationFrame(raf);
       io.disconnect();
       window.removeEventListener("resize", resize);

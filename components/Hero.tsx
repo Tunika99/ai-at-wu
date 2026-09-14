@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   animate,
   motion,
@@ -88,6 +88,18 @@ export function Hero({
   // 3D, is pulled a little further (magnetic) and grows slightly. The
   // lockup's parts sit on separate depth planes, so the tilt parallaxes.
   const reduced = useReducedMotion();
+
+  // The 3D tilt only exists where there is a real hover. Touch devices get a
+  // flat headline - no 3D rendering context to composite (and no Safari
+  // preserve-3d clipping) while the @ intro runs.
+  const [canTilt, setCanTilt] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const sync = () => setCanTilt(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
   const lx = useMotionValue(0);
   const ly = useMotionValue(0);
   const hover = useMotionValue(0);
@@ -157,7 +169,7 @@ export function Hero({
       <motion.h1
         aria-label="AI Society Vienna"
         onPointerMove={(e) => {
-          if (reduced) return;
+          if (reduced || !canTilt) return;
           const r = e.currentTarget.getBoundingClientRect();
           lx.set(Math.max(-1, Math.min(1, ((e.clientX - r.left) / r.width - 0.5) * 2)));
           ly.set(Math.max(-1, Math.min(1, ((e.clientY - r.top) / r.height - 0.5) * 2)));
@@ -174,12 +186,13 @@ export function Hero({
           rotateX: logoRotX,
           rotateY: logoRotY,
           scale: logoScale,
-          transformPerspective: 900,
-          transformStyle: "preserve-3d",
+          ...(canTilt
+            ? { transformPerspective: 900, transformStyle: "preserve-3d" as const }
+            : {}),
         }}
         className="font-display -m-8 flex items-center gap-[0.18em] p-8 text-[2.6rem] leading-none font-bold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl"
       >
-        <span className="inline-block" style={{ transform: "translateZ(0.12em)" }}>
+        <span className="inline-block" style={canTilt ? { transform: "translateZ(0.12em)" } : undefined}>
           <span data-neural-avoid="" className="word-release-left relative z-0 inline-block">
             <ScrambleText
               words={["AI", "ML", "NN", "AI", "DL", "RL", "AI", "CV"]}
@@ -187,12 +200,12 @@ export function Hero({
             />
           </span>
         </span>
-        <span className="inline-block" style={{ transform: "translateZ(0.45em)" }}>
+        <span className="inline-block" style={canTilt ? { transform: "translateZ(0.45em)" } : undefined}>
           <span className="at-intro relative z-10 inline-block">
             <AtOrbit neural />
           </span>
         </span>
-        <span className="inline-block" style={{ transform: "translateZ(0.12em)" }}>
+        <span className="inline-block" style={canTilt ? { transform: "translateZ(0.12em)" } : undefined}>
           <span data-neural-avoid="" className="word-release-right relative z-0 inline-block">
             <span data-neural-avoid="" className="absolute bottom-full left-[0.06em] mb-[0.02em] text-[0.26em] font-medium tracking-[0.42em] whitespace-nowrap text-mist">
               SOCIETY
