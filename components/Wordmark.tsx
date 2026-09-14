@@ -37,12 +37,16 @@ export function AtOrbit({ neural = false }: { neural?: boolean }) {
         <span {...handle} className="absolute top-1/2 right-0 h-[0.055em] w-[0.055em] translate-x-1/2 -translate-y-1/2 bg-neon" />
       </span>
       <span className="spin-48-rev pointer-events-none absolute inset-[-28%] rounded-full border border-dotted border-pulse/25" />
-      {/* Padding + equal negative margin: Safari paints gradient text only
-          inside the element box, and the @ ink sits flush with its 1em box -
-          without the extra room its lower edge gets shaved off while it spins. */}
+      {/* Gradient text is only painted inside the element box, so the padding
+          gives the spinning @ room. Space Grotesk's @ ink sits 0.09em below
+          the centre of its line box, so the padding is 0.09em heavier at the
+          bottom while the margins stay symmetric: the ink lands exactly in the
+          middle of the rings and the spin turns around the ink's own centre.
+          tracking-normal: the heading's negative letter-spacing would trim the
+          box on the right and nudge the ink off-centre. */}
       <span
         {...anchor(neural, "#e879f9", 280, 2000)}
-        className="spin-18 text-gradient -mx-[0.1em] -my-[0.22em] inline-block px-[0.1em] py-[0.22em] leading-none"
+        className="spin-18 text-gradient -mx-[0.1em] -my-[0.22em] inline-block px-[0.1em] pt-[0.13em] pb-[0.31em] leading-none tracking-normal"
       >
         @
       </span>
@@ -62,7 +66,9 @@ export function Wordmark({ className = "" }: { className?: string }) {
       className={`font-display inline-flex items-end gap-[0.22em] leading-none font-semibold tracking-tight ${className}`}
     >
       <span>AI</span>
-      <span className="text-gradient">@</span>
+      {/* padding + equal negative margin: room for the @ ink below its box
+          (gradient text is clipped to the box) without moving the layout */}
+      <span className="text-gradient -m-[0.2em] inline-block p-[0.2em]">@</span>
       <span className="inline-flex flex-col items-start">
         <span className="mb-[0.16em] text-[0.36em] font-medium tracking-[0.34em] text-mist">
           SOCIETY
