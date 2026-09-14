@@ -27,12 +27,14 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="dark">
-      <body
-        className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+    // The font variables must live on <html>: Tailwind resolves its
+    // --font-* theme tokens on :root, so variables set on <body> would be
+    // undefined there and every font would silently fall back to the system.
+    <html
+      lang="en"
+      className={`dark ${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}
+    >
+      <body className="antialiased">{children}</body>
     </html>
   );
 }

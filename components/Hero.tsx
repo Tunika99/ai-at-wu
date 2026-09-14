@@ -240,27 +240,27 @@ export function Hero({
         style={{ animationDelay: `${CONTENT_DELAY + 0.45}s` }}
         className="hero-reveal mt-16 flex items-stretch gap-0 divide-x divide-line"
       >
-        <div className="flex flex-col gap-1.5 px-8 md:px-12">
+        <div className="flex flex-col gap-1.5 px-4 first:pl-0 last:pr-0 sm:px-8 sm:first:pl-8 sm:last:pr-8 md:px-12 md:first:pl-12 md:last:pr-12">
           <dd className="font-display text-3xl font-semibold text-ink md:text-4xl">
             <CountUp from={1990} to={settings.foundedYear} />
           </dd>
-          <dt className="font-mono text-[10px] tracking-[0.2em] text-mist">
+          <dt className="font-mono text-[9px] tracking-[0.14em] whitespace-nowrap text-mist sm:text-[10px] sm:tracking-[0.2em]">
             [ FOUNDED ]
           </dt>
         </div>
-        <div className="flex flex-col gap-1.5 px-8 md:px-12">
+        <div className="flex flex-col gap-1.5 px-4 first:pl-0 last:pr-0 sm:px-8 sm:first:pl-8 sm:last:pr-8 md:px-12 md:first:pl-12 md:last:pr-12">
           <dd className="font-display text-3xl font-semibold text-ink md:text-4xl">
             <CountUp to={memberValue} suffix={memberSuffix} />
           </dd>
-          <dt className="font-mono text-[10px] tracking-[0.2em] text-mist">
+          <dt className="font-mono text-[9px] tracking-[0.14em] whitespace-nowrap text-mist sm:text-[10px] sm:tracking-[0.2em]">
             [ MEMBERS ]
           </dt>
         </div>
-        <div className="flex flex-col gap-1.5 px-8 md:px-12">
+        <div className="flex flex-col gap-1.5 px-4 first:pl-0 last:pr-0 sm:px-8 sm:first:pl-8 sm:last:pr-8 md:px-12 md:first:pl-12 md:last:pr-12">
           <dd className="font-display text-3xl font-semibold text-ink md:text-4xl">
             <CountUp to={eventsValue} suffix={eventsSuffix} />
           </dd>
-          <dt className="font-mono text-[10px] tracking-[0.2em] text-mist">
+          <dt className="font-mono text-[9px] tracking-[0.14em] whitespace-nowrap text-mist sm:text-[10px] sm:tracking-[0.2em]">
             [ EVENTS / YEAR ]
           </dt>
         </div>
