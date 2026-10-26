@@ -107,6 +107,10 @@ export function Footer() {
           © 2026 AI SOCIETY VIENNA - STUDENT SOCIETY AT WU VIENNA · MADE IN VIENNA ·{" "}
           <Link href="/impressum" className="underline-offset-4 transition-colors hover:text-ink hover:underline">
             IMPRESSUM
+          </Link>{" "}
+          ·{" "}
+          <Link href="/datenschutz" className="underline-offset-4 transition-colors hover:text-ink hover:underline">
+            DATENSCHUTZ
           </Link>
         </p>
       </div>

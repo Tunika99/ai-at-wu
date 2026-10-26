@@ -115,7 +115,11 @@ export function JoinForm() {
         <input type="checkbox" name="consent" required className="mt-0.5 h-4 w-4 shrink-0 accent-[#a78bfa]" />
         <span>
           I agree that AI Society Vienna stores my details to manage my membership and adds my number to the
-          WhatsApp community. I can ask for deletion anytime at {site.email}.
+          WhatsApp community. I can ask for deletion anytime at {site.email}. Details in our{" "}
+          <a href="/datenschutz" target="_blank" className="text-neon underline-offset-2 hover:underline">
+            privacy policy
+          </a>
+          .
         </span>
       </label>
 

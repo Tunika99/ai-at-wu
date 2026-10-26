@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import type { ReactNode } from "react";
 import { Backdrop } from "@/components/Backdrop";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { LegalBlock as Block } from "@/components/LegalBlock";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -16,15 +16,6 @@ export const metadata: Metadata = {
  * § 5 E-Commerce-Gesetz and the Offenlegung under § 25 Mediengesetz.
  * The data lives in site.legal.
  */
-function Block({ title, children }: { title: string; children: ReactNode }) {
-  return (
-    <section className="border-t border-line py-7">
-      <h2 className="font-mono text-[10px] tracking-[0.25em] text-neon">[ {title} ]</h2>
-      <div className="mt-3 leading-relaxed text-ink/90">{children}</div>
-    </section>
-  );
-}
-
 export default function ImpressumPage() {
   const l = site.legal;
   return (
