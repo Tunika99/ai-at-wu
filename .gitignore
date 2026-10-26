@@ -20,3 +20,10 @@ npm-debug.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# media that must not go into this public repo (third-party photos, footage of people,
+# generated music) and generated output - all reproducible from the scripts
+video/public/footage/
+video/public/media/
+video/public/audio/
+stickers/out/

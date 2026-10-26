@@ -81,7 +81,7 @@ export function Benefits() {
 
       <div className="mx-auto max-w-6xl">
         <SectionHeading
-          index="03"
+          index="02"
           label="MEMBER BENEFITS"
           title="What membership unlocks."
           intro="Free for WU students. One application, a whole semester of access."

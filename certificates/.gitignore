@@ -1,0 +1,4 @@
+# The website repo is public: never commit signatures or issued certificates.
+out/
+signatures/*
+!signatures/.gitkeep

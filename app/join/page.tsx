@@ -8,7 +8,7 @@ import { Wordmark } from "@/components/Wordmark";
 export const metadata: Metadata = {
   title: "Become a Member - AI Society Vienna",
   description:
-    "Join AI Society Vienna, the student society for artificial intelligence at WU Vienna. Free for WU students.",
+    "Join AI Society Vienna, the student society for artificial intelligence at WU Vienna. Free membership.",
 };
 
 export default function JoinPage() {
@@ -28,14 +28,22 @@ export default function JoinPage() {
             Join <Wordmark />
           </h1>
           <p className="mx-auto mt-5 max-w-md leading-relaxed text-mist">
-            Free for WU students. Fill in the form and we&apos;ll onboard you
-            to the community and the member portal.
+            Free membership. Fill in the form and you&apos;ll get an email
+            right away with the link to our WhatsApp community and the member
+            portal.
           </p>
         </div>
 
         <JoinForm />
 
-        <p className="mt-8 text-center">
+        <p className="mt-8 text-center text-sm text-mist">
+          Want to help run the society?{" "}
+          <Link href="/#core-team" className="font-semibold text-neon transition-colors duration-200 hover:text-ink">
+            Become a core member →
+          </Link>
+        </p>
+
+        <p className="mt-4 text-center">
           <Link
             href="/"
             className="text-sm text-mist transition-colors duration-200 hover:text-ink"

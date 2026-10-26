@@ -14,8 +14,21 @@ export const site = {
   memberCount: "50+",
   eventsPerYear: "30+",
   partner: "AI @ Penn",
-  /** Board group photo in /public, e.g. "/team.jpg". Empty shows a placeholder frame. */
-  teamPhoto: "",
+  /** The one public address for members, partners and core-team applications. */
+  email: "info@aisocietyvienna.tech",
+  /** Registered association details (Bescheid LPD Wien, GZ XV-19.161) - used by /impressum. */
+  legal: {
+    name: "AI Society Vienna - Verein zur Förderung der Auseinandersetzung mit künstlicher Intelligenz",
+    zvr: "1989830120",
+    seat: "Wien",
+    address: ["Simmeringer Hauptstraße 26/1/10", "1110 Wien", "Österreich"],
+    authority: "Landespolizeidirektion Wien, Vereinsbehörde",
+    board: [
+      { name: "Paul Dobringer", role: "President" },
+      { name: "Edward Dimapilis", role: "Vice President" },
+    ],
+    purpose: "Förderung der Auseinandersetzung mit künstlicher Intelligenz",
+  },
   cta: {
     joinLabel: "Become a Member",
     joinHref: "/join",
@@ -40,7 +53,6 @@ export const site = {
    */
   nav: [
     { label: "About", href: "/#about" },
-    { label: "Team", href: "/#team" },
     { label: "Benefits", href: "/#benefits" },
     { label: "Events", href: "/#events" },
     { label: "Partners", href: "/#partners" },

@@ -86,10 +86,10 @@ export function Footer() {
               [ CONTACT ]
             </p>
             <a
-              href="mailto:hello@aisocietyvienna.tech"
+              href={`mailto:${site.email}`}
               className="text-sm text-mist transition-colors duration-200 hover:text-ink"
             >
-              hello@aisocietyvienna.tech
+              {site.email}
             </a>
             <a
               href={site.memberPortal.url}
@@ -104,7 +104,10 @@ export function Footer() {
         </div>
 
         <p className="mt-12 text-center font-mono text-[10px] tracking-[0.2em] text-mist/40">
-          © 2026 AI SOCIETY VIENNA - STUDENT SOCIETY AT WU VIENNA · MADE IN VIENNA
+          © 2026 AI SOCIETY VIENNA - STUDENT SOCIETY AT WU VIENNA · MADE IN VIENNA ·{" "}
+          <Link href="/impressum" className="underline-offset-4 transition-colors hover:text-ink hover:underline">
+            IMPRESSUM
+          </Link>
         </p>
       </div>
     </footer>

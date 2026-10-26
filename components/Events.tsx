@@ -21,7 +21,7 @@ export function Events({ events = defaultEvents }: { events?: EventItem[] }) {
     >
       <div className="mx-auto max-w-6xl">
         <SectionHeading
-          index="04"
+          index="03"
           label="EVENTS"
           title="Past events."
           intro="A look back at the workshops, speaker nights and meetups we have hosted."

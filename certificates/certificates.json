@@ -1,0 +1,46 @@
+{
+  "signers": {
+    "president": {
+      "name": "Paul Dobringer",
+      "title": "President",
+      "signature": "signatures/president.png"
+    },
+    "vicePresident": {
+      "name": "Edward Dimapilis",
+      "title": "Vice President",
+      "signature": "signatures/vice-president.png"
+    }
+  },
+  "about": "AI Society Vienna is the student society for artificial intelligence at WU Vienna. Founded in 2026, we make AI tangible for every student - through hands-on workshops, speaker nights and a community that builds real projects together.",
+  "templates": {
+    "member": {
+      "title": "Certificate of Membership",
+      "roleLine": "is a member of",
+      "recognition": "{firstName} has been an active and valued part of our community and has done an outstanding job. Thank you for your commitment, your ideas and the energy you bring to AI Society Vienna.",
+      "signedBy": [
+        "president",
+        "vicePresident"
+      ]
+    },
+    "president": {
+      "title": "Certificate of Membership",
+      "roleLine": "serves as President of",
+      "recognition": "As President, {firstName} has led AI Society Vienna with vision and dedication - building the team, the community and its program from the ground up. Thank you for an outstanding job.",
+      "signedBy": [
+        "vicePresident"
+      ]
+    }
+  },
+  "certificates": [
+    {
+      "name": "Max Mustermann",
+      "template": "member",
+      "memberSince": "October 2026"
+    },
+    {
+      "name": "Paul Dobringer",
+      "template": "president",
+      "memberSince": "2026"
+    }
+  ]
+}

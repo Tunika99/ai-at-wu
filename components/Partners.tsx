@@ -1,6 +1,7 @@
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ArrowUpRightIcon, GlobeIcon } from "@/components/icons";
+import { site } from "@/lib/site";
 
 const jointFormats = [
   "JOINT SPEAKER SESSIONS",
@@ -19,7 +20,7 @@ export function Partners() {
 
       <div className="mx-auto max-w-6xl">
         <SectionHeading
-          index="05"
+          index="04"
           label="PARTNERS"
           title="Stronger together."
           intro="We collaborate with student societies and companies that share our mission."
@@ -73,10 +74,10 @@ export function Partners() {
                 through workshops, recruiting formats or event sponsoring.
               </p>
               <a
-                href="mailto:partners@aisocietyvienna.tech"
+                href={`mailto:${site.email}?subject=${encodeURIComponent("Partnership")}`}
                 className="group mt-auto inline-flex items-center gap-2 text-sm font-semibold text-neon"
               >
-                partners@aisocietyvienna.tech
+                {site.email}
                 <ArrowUpRightIcon className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
             </article>

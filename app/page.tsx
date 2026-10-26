@@ -2,10 +2,10 @@ import { Backdrop } from "@/components/Backdrop";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { About } from "@/components/About";
-import { Team } from "@/components/Team";
 import { Benefits } from "@/components/Benefits";
 import { Events } from "@/components/Events";
 import { Partners } from "@/components/Partners";
+import { CoreTeam } from "@/components/CoreTeam";
 import { Footer } from "@/components/Footer";
 import { getEvents, getSiteSettings } from "@/lib/data";
 
@@ -23,10 +23,10 @@ export default async function Home() {
       <Navbar />
       <Hero settings={settings} />
       <About />
-      <Team />
       <Benefits />
       <Events events={events} />
       <Partners />
+      <CoreTeam />
       <Footer />
     </main>
   );
