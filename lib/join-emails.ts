@@ -27,13 +27,10 @@ export function welcomeEmail(a: Application, whatsapp: string | undefined) {
   const first = a.name.split(" ")[0];
   const steps: string[] = [];
   if (whatsapp) {
-    steps.push(`<p style="margin:26px 0 6px;font-weight:600">1. Join our WhatsApp community</p>
+    steps.push(`<p style="margin:26px 0 6px;font-weight:600">Join our WhatsApp community</p>
 <p style="margin:0 0 14px;color:#4b4560">Announcements, events and quick questions - this is where it all happens.</p>
 ${button(whatsapp, "Join the WhatsApp community")}`);
   }
-  steps.push(`<p style="margin:26px 0 6px;font-weight:600">${whatsapp ? "2. " : ""}Open the member portal</p>
-<p style="margin:0 0 14px;color:#4b4560">Slides, recordings and learning resources. Sign in to Notion with this email address (<b>${esc(a.email)}</b>) to get access.</p>
-${button(site.memberPortal.url, "Open the member portal")}`);
 
   const html = shell(`<p style="margin:0">Hi ${esc(first)},</p>
 <p>thanks for joining <b>AI Society Vienna</b> - we're excited to have you on board! Here's how to get started:</p>
@@ -47,9 +44,6 @@ ${steps.join("\n")}
     "thanks for joining AI Society Vienna - we're excited to have you on board!",
     "",
     ...(whatsapp ? ["Join our WhatsApp community:", whatsapp, ""] : []),
-    `Member portal (sign in to Notion with ${a.email}):`,
-    site.memberPortal.url,
-    "",
     "Questions? Just reply to this email.",
     "",
     "See you soon,",
@@ -72,7 +66,7 @@ export function notificationEmail(a: Application, submittedAt: string) {
 <table cellpadding="0" cellspacing="0" style="font-size:14px">${rows
     .map(([k, v]) => `<tr><td style="padding:4px 18px 4px 0;color:#8a84a3">${k}</td><td style="padding:4px 0">${esc(v)}</td></tr>`)
     .join("")}</table>
-<p style="color:#4b4560">Already added to the member sheet. The welcome email with the WhatsApp and portal links went out automatically.</p>`);
+<p style="color:#4b4560">Already added to the member sheet. The welcome email with the WhatsApp link went out automatically.</p>`);
   const text = rows.map(([k, v]) => `${k}: ${v}`).join("\n");
   return { subject: `New member: ${a.name} (${a.program.split(" - ")[0]})`, html, text };
 }

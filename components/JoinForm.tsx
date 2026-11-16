@@ -62,8 +62,8 @@ export function JoinForm() {
         </h2>
         <p className="mx-auto mt-4 max-w-sm text-sm leading-relaxed text-mist">
           {status.welcomeSent
-            ? "Check your inbox: we've just sent you the link to our WhatsApp community and to the member portal. Nothing there? Have a look in your spam folder."
-            : "We've got your application and will send you the links to our WhatsApp community and the member portal shortly."}
+            ? "Check your inbox: we've just sent you the link to our WhatsApp community. Nothing there? Have a look in your spam folder."
+            : "We've got your application and will send you the link to our WhatsApp community shortly."}
         </p>
       </motion.div>
     );

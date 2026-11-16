@@ -29,8 +29,7 @@ export default function JoinPage() {
           </h1>
           <p className="mx-auto mt-5 max-w-md leading-relaxed text-mist">
             Free membership. Fill in the form and you&apos;ll get an email
-            right away with the link to our WhatsApp community and the member
-            portal.
+            right away with the link to our WhatsApp community.
           </p>
         </div>
 
