@@ -12,6 +12,8 @@
  *   SECRET     required - the same long random string as MEMBERS_SHEET_SECRET in Vercel
  *   NOTIFY_TO  optional - where notifications go (default: the account that owns the script)
  *   REPLY_TO   optional - where replies to the welcome email go (e.g. info@aisocietyvienna.tech once that inbox works)
+ *   SHEET_ID   only if this script was NOT created from the sheet: the id from the sheet's URL
+ *              (docs.google.com/spreadsheets/d/<SHEET_ID>/edit)
  *   FROM       optional - send as this address instead of the Google account, e.g. info@aisocietyvienna.tech.
  *              It must be set up in this Gmail account first (Settings -> Accounts -> "Send mail as").
  */
@@ -52,7 +54,10 @@ function doPost(e) {
   const lock = LockService.getScriptLock();
   lock.waitLock(10000);
   try {
-    const book = SpreadsheetApp.getActiveSpreadsheet();
+    // bound script: the sheet it lives in; standalone script: the SHEET_ID property
+    const sheetId = props.getProperty("SHEET_ID");
+    const book = sheetId ? SpreadsheetApp.openById(sheetId) : SpreadsheetApp.getActiveSpreadsheet();
+    if (!book) throw new Error("No sheet: open the script from the sheet (Extensions -> Apps Script) or set SHEET_ID");
     const sheet = book.getSheetByName(SHEET) || book.insertSheet(SHEET);
     if (sheet.getLastRow() === 0) {
       sheet.appendRow(HEADER);
@@ -125,7 +130,9 @@ function reply(obj) {
  * Google then asks for permission to edit the sheet and send email.
  */
 function authorize() {
-  SpreadsheetApp.getActiveSpreadsheet();
+  const id = PropertiesService.getScriptProperties().getProperty("SHEET_ID");
+  const book = id ? SpreadsheetApp.openById(id) : SpreadsheetApp.getActiveSpreadsheet();
+  console.log(book ? "Sheet: " + book.getName() : "NO SHEET - set the SHEET_ID script property");
   MailApp.getRemainingDailyQuota();
   console.log("Send-mail-as aliases: " + GmailApp.getAliases().join(", "));
 }
