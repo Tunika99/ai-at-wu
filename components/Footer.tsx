@@ -103,7 +103,12 @@ export function Footer() {
           </div>
         </div>
 
-        <p className="mt-12 text-center font-mono text-[10px] tracking-[0.2em] text-mist/40">
+        {/* Full legal name + register number on every page: lets Google for Nonprofits,
+            sponsors etc. tie the domain to the registered association. */}
+        <p className="mt-12 text-center text-xs leading-relaxed text-mist/60">
+          {site.legal.name} · ZVR-Zahl {site.legal.zvr} · Sitz {site.legal.seat}
+        </p>
+        <p className="mt-3 text-center font-mono text-[10px] tracking-[0.2em] text-mist/40">
           © 2026 AI SOCIETY VIENNA - STUDENT SOCIETY AT WU VIENNA · MADE IN VIENNA ·{" "}
           <Link href="/impressum" className="underline-offset-4 transition-colors hover:text-ink hover:underline">
             IMPRESSUM
