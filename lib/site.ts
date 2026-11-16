@@ -56,5 +56,6 @@ export const site = {
     { label: "Benefits", href: "/#benefits" },
     { label: "Events", href: "/#events" },
     { label: "Partners", href: "/#partners" },
+    { label: "News", href: "/news" },
   ],
 } as const;
