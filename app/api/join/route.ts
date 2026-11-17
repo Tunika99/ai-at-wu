@@ -54,14 +54,14 @@ export async function POST(req: Request) {
         secret: MEMBERS_SHEET_SECRET,
         submittedAt,
         ...app,
-        welcome: welcomeEmail(app, WHATSAPP_INVITE_URL),
+        welcome: welcomeEmail(app, Boolean(WHATSAPP_INVITE_URL)),
         notification: notificationEmail(app, submittedAt),
       }),
       redirect: "follow", // Apps Script answers through a redirect
     });
     const out = (await res.json().catch(() => null)) as { ok?: boolean; welcomeSent?: boolean; error?: string } | null;
     if (!res.ok || !out?.ok) throw new Error(`Sheet ${res.status}: ${out?.error ?? "no confirmation"}`);
-    return json({ ok: true, welcomeSent: out.welcomeSent !== false });
+    return json({ ok: true, welcomeSent: out.welcomeSent !== false, whatsapp: Boolean(WHATSAPP_INVITE_URL) });
   } catch (err) {
     console.error("[join] failed:", err);
     return json({ ok: false, error: `Something went wrong. Please try again or write to ${site.email}.` }, 502);

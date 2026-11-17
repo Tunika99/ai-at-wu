@@ -23,7 +23,9 @@ const shell = (body: string) => `<!doctype html><html><body style="margin:0;padd
 </table></td></tr></table></body></html>`;
 
 /** Sent to the new member right after they apply. */
-export function welcomeEmail(a: Application, whatsapp: string | undefined) {
+export function welcomeEmail(a: Application, hasWhatsapp: boolean) {
+  // Our own redirect, never the chat.whatsapp.com invite itself (see app/whatsapp/route.ts)
+  const whatsapp = hasWhatsapp ? "https://www.aisocietyvienna.tech/whatsapp" : "";
   const first = a.name.split(" ")[0];
   const steps: string[] = [];
   if (whatsapp) {

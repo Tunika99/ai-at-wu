@@ -8,7 +8,7 @@ import { site } from "@/lib/site";
 type Status =
   | { state: "idle" }
   | { state: "sending" }
-  | { state: "done"; welcomeSent: boolean }
+  | { state: "done"; welcomeSent: boolean; whatsapp: boolean }
   | { state: "error"; message: string };
 
 const field =
@@ -40,7 +40,7 @@ export function JoinForm() {
         setStatus({ state: "error", message: out.error ?? `Something went wrong. Please try again or write to ${site.email}.` });
         return;
       }
-      setStatus({ state: "done", welcomeSent: out.welcomeSent !== false });
+      setStatus({ state: "done", welcomeSent: out.welcomeSent !== false, whatsapp: out.whatsapp === true });
     } catch {
       setStatus({ state: "error", message: `No connection. Please try again or write to ${site.email}.` });
     }
@@ -60,11 +60,30 @@ export function JoinForm() {
         <h2 className="font-display mt-4 text-2xl font-bold text-ink">
           Welcome aboard 🎉
         </h2>
-        <p className="mx-auto mt-4 max-w-sm text-sm leading-relaxed text-mist">
-          {status.welcomeSent
-            ? "Check your inbox: we've just sent you the link to our WhatsApp community. Nothing there? Have a look in your spam folder."
-            : "We've got your application and will send you the link to our WhatsApp community shortly."}
-        </p>
+        {status.whatsapp ? (
+          <>
+            <p className="mx-auto mt-4 max-w-sm text-sm leading-relaxed text-mist">
+              Your next step: join our WhatsApp community - announcements, events and quick questions all happen there.
+            </p>
+            <a
+              href="/whatsapp"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="glow-neon mt-6 inline-flex items-center gap-2 rounded-full bg-neon px-7 py-3 text-sm font-semibold text-void"
+            >
+              Join the WhatsApp community
+            </a>
+            <p className="mx-auto mt-5 max-w-sm text-xs leading-relaxed text-mist/70">
+              We&apos;ve also sent you a welcome email with the same link.
+            </p>
+          </>
+        ) : (
+          <p className="mx-auto mt-4 max-w-sm text-sm leading-relaxed text-mist">
+            {status.welcomeSent
+              ? "Check your inbox: we've just sent you the link to our WhatsApp community. Nothing there? Have a look in your spam folder."
+              : "We've got your application and will send you the link to our WhatsApp community shortly."}
+          </p>
+        )}
       </motion.div>
     );
   }
