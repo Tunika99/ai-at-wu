@@ -52,10 +52,10 @@ export const site = {
    * /join, where a bare hash would look for a section that isn't there.
    */
   nav: [
-    { label: "About", href: "/#about" },
-    { label: "Benefits", href: "/#benefits" },
+    { label: "About", href: "/about" },
     { label: "Events", href: "/#events" },
     { label: "Partners", href: "/#partners" },
     { label: "News", href: "/news" },
+    { label: "Contact", href: "/contact" },
   ],
 } as const;

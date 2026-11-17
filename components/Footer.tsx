@@ -107,6 +107,8 @@ export function Footer() {
             sponsors etc. tie the domain to the registered association. */}
         <p className="mt-12 text-center text-xs leading-relaxed text-mist/60">
           {site.legal.name} · ZVR-Zahl {site.legal.zvr} · Sitz {site.legal.seat}
+          <br />
+          {site.legal.address.join(", ")}
         </p>
         <p className="mt-3 text-center font-mono text-[10px] tracking-[0.2em] text-mist/40">
           © 2026 AI SOCIETY VIENNA - STUDENT SOCIETY AT WU VIENNA · MADE IN VIENNA ·{" "}
