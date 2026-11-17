@@ -74,6 +74,36 @@ export default function AboutPage() {
       </section>
 
       <section className="mx-auto max-w-5xl px-5 pb-16 md:px-8">
+        <h2 className="font-display text-2xl font-semibold text-ink md:text-3xl">Out and about</h2>
+        <div className="mt-8 grid gap-5 md:grid-cols-2">
+          <figure className="overflow-hidden rounded-2xl border border-line">
+            <Image
+              src="/about/tedai-vienna.jpg"
+              alt="TEDAI Vienna on stage with the slide 'The last programmer has already been born'"
+              width={1200}
+              height={1600}
+              className="aspect-[4/5] w-full object-cover"
+            />
+            <figcaption className="px-5 py-3 text-xs text-mist">
+              AI Society Vienna @ TEDAI Vienna - &quot;The last programmer has already been born.&quot;
+            </figcaption>
+          </figure>
+          <figure className="overflow-hidden rounded-2xl border border-line">
+            <Image
+              src="/about/meme-skip-lectures.jpg"
+              alt="Meme: the WU Library & Learning Center answers like a chatbot that skipping all lectures is a brilliant idea"
+              width={1080}
+              height={1350}
+              className="aspect-[4/5] w-full object-cover"
+            />
+            <figcaption className="px-5 py-3 text-xs text-mist">
+              From our Instagram: even the Library &amp; Learning Center is a people pleaser now.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-5xl px-5 pb-16 md:px-8">
         <h2 className="font-display text-2xl font-semibold text-ink md:text-3xl">What we do</h2>
         <div className="mt-8 grid gap-5 md:grid-cols-3">
           {activities.map((a) => (
