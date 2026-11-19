@@ -57,7 +57,7 @@ export default function HackathonPost() {
 
         <dl className="mt-10 grid gap-4 sm:grid-cols-2">
           <Fact label="WHERE">WU Vienna, Welthandelsplatz 1, 1020 Vienna</Fact>
-          <Fact label="WHEN">Thursday, 11 December 2026</Fact>
+          <Fact label="WHEN">Friday, 11 December 2026</Fact>
           <Fact label="WHO">50 students of all fields - teams of 3-4</Fact>
           <Fact label="TOOL">Lovable - build apps by chatting with AI</Fact>
         </dl>
