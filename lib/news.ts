@@ -11,11 +11,11 @@ export type NewsPost = {
 export const news: NewsPost[] = [
   {
     slug: "build-the-future-of-learning",
-    date: "November 2026",
+    date: "11 December 2026",
     tag: "HACKATHON",
     title: "Build the Future of Learning - our Lovable vibe coding hackathon",
     teaser:
-      "One day at WU, teams of 3-4, no coding experience needed: build a tool that makes studying better with Lovable.",
+      "11 December at WU, 50 students in teams of 3-4, no coding experience needed: build a tool that makes studying better with Lovable.",
     image: "/news/hackathon-cover.png",
   },
 ];

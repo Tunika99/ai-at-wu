@@ -9,7 +9,7 @@ import { site } from "@/lib/site";
 
 const title = "Build the Future of Learning - a vibe coding hackathon with Lovable";
 const description =
-  "AI Society Vienna's one-day hackathon at WU Vienna: teams of 3-4 build tools that make learning better with Lovable. No coding experience needed.";
+  "AI Society Vienna's one-day hackathon at WU Vienna on 11 December 2026: teams of 3-4 build tools that make learning better with Lovable. No coding experience needed.";
 
 export const metadata: Metadata = {
   title: `${title} - AI Society Vienna`,
@@ -57,8 +57,8 @@ export default function HackathonPost() {
 
         <dl className="mt-10 grid gap-4 sm:grid-cols-2">
           <Fact label="WHERE">WU Vienna, Welthandelsplatz 1, 1020 Vienna</Fact>
-          <Fact label="WHEN">Date to be announced</Fact>
-          <Fact label="WHO">Students of all fields - teams of 3-4</Fact>
+          <Fact label="WHEN">Thursday, 11 December 2026</Fact>
+          <Fact label="WHO">50 students of all fields - teams of 3-4</Fact>
           <Fact label="TOOL">Lovable - build apps by chatting with AI</Fact>
         </dl>
 
